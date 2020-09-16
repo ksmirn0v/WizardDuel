@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(InputField))]
 public class PlayerName : MonoBehaviour {
-
+    
     private const string PLAYER_NAME_KEY = "PlayerName";
 
     private void Start() {

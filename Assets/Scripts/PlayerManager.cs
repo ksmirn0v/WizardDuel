@@ -10,13 +10,12 @@ public class PlayerManager : MonoBehaviourPunCallbacks {
         if (photonView.IsMine) {
             PlayerManager.localInstance = this.gameObject;
         }
-        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start() {
         if (playerUIPrefab != null) {
             GameObject playerUIObject = Instantiate(playerUIPrefab);
-            playerUIObject.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+            playerUIObject.GetComponent<PlayerUI>().SetTarget(this);
         } else {
             Debug.LogWarning("Missing playerUIPrefab reference.");
         }
@@ -24,6 +23,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks {
 
     private void OnLevelWasLoaded(int level) {
         GameObject playerUIObject = Instantiate(this.playerUIPrefab);
-        playerUIObject.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+        playerUIObject.GetComponent<PlayerUI>().SetTarget(this);
     }
 }

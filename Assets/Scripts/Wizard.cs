@@ -1,34 +1,47 @@
 ﻿using Photon.Pun;
 using UnityEngine;
+using System.Collections;
 
-public class Wizard : MonoBehaviourPunCallbacks {
+public class Wizard : MonoBehaviour, IPunObservable {
 
     [SerializeField] float movementVelocity = 8.0f;
     [SerializeField] float jumpVelocity = 15.0f;
-    [SerializeField] GameObject fireball;
     [SerializeField] float fireballVelocity = 15.0f;
 
+    private GameManager gameManager;
+    private Transform transformComponent;
     private Rigidbody2D rigidBody;
     private Animator animator;
     private CapsuleCollider2D capsuleCollider;
     private Transform fireballTransform;
+    private PhotonView photonView;
     private bool isAlive = true;
 
     public void Fire() {
-        GameObject fireballObject = Instantiate(fireball, fireballTransform.position, fireballTransform.rotation) as GameObject;
-        fireballObject.GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x * fireballVelocity, 0.0f);
+        if (photonView.IsMine) {
+            GameObject fireballObject = PhotonNetwork.Instantiate("Fireball", fireballTransform.position, fireballTransform.rotation) as GameObject;
+            fireballObject.GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x * fireballVelocity, 0.0f);
+        }
     }
 
     public void TriggerDeath() {
         animator.SetTrigger("DeadTrigger");
         isAlive = false;
-        GameManager.instance.LeaveRoom();
+        StartCoroutine(LeaveRoom());
     }
 
-    private void Start() {
+    private IEnumerator LeaveRoom() {
+        yield return new WaitForSecondsRealtime(5.0f);
+        gameManager.LeaveRoom();
+    }
+
+    private void Awake() {
+        gameManager = FindObjectOfType<GameManager>();
+        transformComponent = GetComponent<Transform>();
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         capsuleCollider = GetComponentInChildren<CapsuleCollider2D>();
+        photonView = GetComponent<PhotonView>();
         fireballTransform = transform.GetChild(0).GetChild(0);
     }
 
@@ -81,6 +94,18 @@ public class Wizard : MonoBehaviourPunCallbacks {
     private void Attack() {
         if (Input.GetButtonDown("Fire1")) {
             animator.SetTrigger("AttackTrigger");
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
+        if (stream.IsWriting) {
+            stream.SendNext(transformComponent.position);
+            stream.SendNext(transformComponent.localScale);
+            stream.SendNext(rigidBody.velocity);
+        } else {
+            transform.position = (Vector3)stream.ReceiveNext();
+            transform.localScale = (Vector3)stream.ReceiveNext();
+            rigidBody.velocity = (Vector2)stream.ReceiveNext();
         }
     }
 }

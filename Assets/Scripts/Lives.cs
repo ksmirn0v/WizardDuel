@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Lives : MonoBehaviourPunCallbacks {
 
-    [SerializeField] private int lives = 3;
+    [SerializeField] private int lives = 10;
 
     private Wizard wizard;
 

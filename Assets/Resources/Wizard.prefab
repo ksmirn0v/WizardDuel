@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 114930134747448414}
   - component: {fileID: 8615013950717737651}
   - component: {fileID: 114555598751874980}
-  - component: {fileID: 8020199567896893091}
   - component: {fileID: 8281075349301430532}
   m_Layer: 10
   m_Name: Wizard
@@ -90,10 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f79c9f6792dce7247a5d51b6d398dda7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementVelocity: 5
-  jumpVelocity: 10
-  fireball: {fileID: 1125943937049331959, guid: bfd831ba6532233498a5a7fede54070e,
-    type: 3}
+  movementVelocity: 8
+  jumpVelocity: 15
   fireballVelocity: 15
 --- !u!114 &8615013950717737651
 MonoBehaviour:
@@ -128,26 +125,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 8020199567896893091}
   - {fileID: 8281075349301430532}
+  - {fileID: 0}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &8020199567896893091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2730892477567697866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 1
 --- !u!114 &8281075349301430532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28709a9dac6bf54e80e9b1bc712e401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lives: 3
+  lives: 10
 --- !u!1 &4077247685797010560
 GameObject:
   m_ObjectHideFlags: 0
