@@ -1,0 +1,53 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WizardController : MonoBehaviour {
+
+    private WizardModel wizardModel;
+    private WizardMovement wizardMovement;
+    private BoxCollider2D wizardGroundCollider;
+
+    private void Start() {
+        wizardModel = GetComponent<WizardModel>();
+        wizardMovement = GetComponent<WizardMovement>();
+        wizardGroundCollider = GetComponentInChildren<BoxCollider2D>();
+    }
+
+    private void Update() {
+        if (!wizardModel.isAlive) {
+            return;
+        }
+
+        CheckMovementCondition();
+        CheckJumpCondition();
+        CheckAttackCondition();
+    }
+
+    private void CheckMovementCondition() {
+        float horizontalTrigger = Input.GetAxis("Horizontal");
+        bool triggerIsBigEnough = Mathf.Abs(horizontalTrigger) > Mathf.Epsilon;
+        if (triggerIsBigEnough) {
+            float directionTrigger = Mathf.Sign(horizontalTrigger);
+            wizardModel.xScale = directionTrigger;
+            wizardModel.xVelocity = horizontalTrigger * wizardModel.horizontalVelocity;
+        }
+        wizardModel.isMoving = triggerIsBigEnough;
+    }
+
+    private void CheckJumpCondition() {
+        if (Input.GetButtonDown("Jump") && !wizardModel.isJumping) {
+            wizardModel.isJumping = true;
+            wizardModel.yVelocity = wizardModel.jumpVelocity;
+        }
+
+        bool wizardIsOnTheGround = wizardGroundCollider.IsTouchingLayers(LayerMask.GetMask("Foreground"));
+        wizardModel.isJumping = !wizardIsOnTheGround;
+    }
+
+    private void CheckAttackCondition() {
+        if (Input.GetButtonDown("Fire1")) {
+            wizardModel.isAttacking = true;
+        }
+    }
+}
