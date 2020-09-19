@@ -15,6 +15,10 @@ public class WizardController : MonoBehaviour {
     }
 
     private void Update() {
+        if (!wizardModel.isOwned) {
+            return;
+        }
+
         if (!wizardModel.isAlive) {
             return;
         }

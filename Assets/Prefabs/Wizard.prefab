@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1977550051}
   - component: {fileID: 1977550050}
   - component: {fileID: 1977550049}
-  - component: {fileID: 1977550054}
+  - component: {fileID: 6346667726625425387}
   m_Layer: 10
   m_Name: Wizard
   m_TagString: Untagged
@@ -94,7 +94,7 @@ MonoBehaviour:
   horizontalVelocity: 8
   jumpVelocity: 15
   isAlive: 1
-  lives: 0
+  lives: 10
   isMoving: 0
   isJumping: 0
   isAttacking: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
     type: 3}
   mainTransform: {fileID: 2730892477567697867}
   spawnTransform: {fileID: 5538962136125200992}
---- !u!114 &1977550054
+--- !u!114 &6346667726625425387
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,6 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b6158a404360d843b13135493e7b996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthIndicatorPrefab: {fileID: 2971950942935228443, guid: 5d7da884e2721f54da4ce94d1ad12e73,
+    type: 3}
 --- !u!1 &2730892477745173022
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +178,6 @@ GameObject:
   - component: {fileID: 2730892477745173023}
   - component: {fileID: 2730892477745173020}
   - component: {fileID: 2730892477745173021}
-  - component: {fileID: 880547573}
   - component: {fileID: 901332375}
   m_Layer: 10
   m_Name: Body
@@ -264,19 +265,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.032219768, y: -0.74103975}
   m_Size: {x: 1.438031, y: 2.500167}
   m_Direction: 0
---- !u!114 &880547573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2730892477745173022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a28709a9dac6bf54e80e9b1bc712e401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lives: 10
 --- !u!61 &901332375
 BoxCollider2D:
   m_ObjectHideFlags: 0

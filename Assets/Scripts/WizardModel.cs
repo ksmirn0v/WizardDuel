@@ -9,8 +9,9 @@ public class WizardModel : MonoBehaviour {
     public float jumpVelocity = 15.0f;
 
     // variables that are sent over the network
+    [HideInInspector] public bool isOwned = false;
     [HideInInspector] public bool isAlive = true;
-    [HideInInspector] public int lives;
+    [HideInInspector] public int lives = 10;
     [HideInInspector] public bool isMoving;
     [HideInInspector] public bool isJumping;
     [HideInInspector] public bool isAttacking;

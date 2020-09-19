@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviourPunCallbacks {
 
-    [SerializeField] private Transform[] spawnPositions;
+    [SerializeField] private WizardModel wizardModelLeft;
+    [SerializeField] private WizardModel wizardModelRight;
 
     private GameObject player;
 
@@ -16,12 +17,13 @@ public class GameManager : MonoBehaviourPunCallbacks {
 
         if (PlayerManager.localInstance == null) {
             if (PhotonNetwork.IsMasterClient) {
-                player = PhotonNetwork.Instantiate("Wizard", spawnPositions[0].position, spawnPositions[0].rotation);
+                player = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+                wizardModelLeft.isOwned = true;
             } else {
-                player = PhotonNetwork.Instantiate("Wizard", spawnPositions[1].position, spawnPositions[1].rotation);
-                
+                player = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+                wizardModelRight.isOwned = true;
+
             }
-            Debug.Log("The player " + PhotonNetwork.LocalPlayer.NickName + " is in the room.");
         }
     }
 
