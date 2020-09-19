@@ -36,22 +36,22 @@ public class WizardController : MonoBehaviour {
             wizardModel.SetXScale(directionTrigger);
             wizardModel.SetXVelocity(horizontalTrigger * wizardModel.horizontalVelocity);
         }
-        wizardModel.isMoving = triggerIsBigEnough;
+        wizardModel.SetIsMoving(triggerIsBigEnough);
     }
 
     private void CheckJumpCondition() {
-        if (Input.GetButtonDown("Jump") && !wizardModel.isJumping) {
-            wizardModel.isJumping = true;
+        if (Input.GetButtonDown("Jump") && !wizardModel.GetIsJumping()) {
+            wizardModel.SetIsJumping(true);
             wizardModel.SetYVelocity(wizardModel.jumpVelocity);
         }
 
         bool wizardIsOnTheGround = wizardGroundCollider.IsTouchingLayers(LayerMask.GetMask("Foreground"));
-        wizardModel.isJumping = !wizardIsOnTheGround;
+        wizardModel.SetIsJumping(!wizardIsOnTheGround);
     }
 
     private void CheckAttackCondition() {
         if (Input.GetButtonDown("Fire1")) {
-            wizardModel.isAttacking = true;
+            wizardModel.SetIsAttacking(true);
         }
     }
 }

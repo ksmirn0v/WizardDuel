@@ -13,12 +13,62 @@ public class WizardModel : MonoBehaviourPunCallbacks {
     [HideInInspector] public bool isOwned = false;
     [HideInInspector] public bool isAlive = true;
     [HideInInspector] public int lives = 10;
-    [HideInInspector] public bool isMoving = false;
-    [HideInInspector] public bool isJumping = false;
-    [HideInInspector] public bool isAttacking = false;
+    private bool isMoving = false;
+    private bool isJumping = false;
+    private bool isAttacking = false;
     private float xVelocity = 0.0f;
     private float yVelocity = 0.0f;
     private float xScale = 0.0f;
+
+    // isMoving
+
+    public void SetIsMoving(bool value) {
+        isMoving = value;
+        photonView.RPC("SendIsMoving", RpcTarget.Others, value);
+    }
+
+    public bool GetIsMoving() {
+        return isMoving;
+    }
+
+    [PunRPC]
+    private void SendIsMoving(bool value) {
+        isMoving = value;
+    }
+
+    // isJumping
+
+    public void SetIsJumping(bool value) {
+        isJumping = value;
+        photonView.RPC("SendIsJumping", RpcTarget.Others, value);
+    }
+
+    public bool GetIsJumping() {
+        return isJumping;
+    }
+
+    [PunRPC]
+    private void SendIsJumping(bool value) {
+        isJumping = value;
+    }
+
+    // isAttacking
+
+    public void SetIsAttacking(bool value) {
+        isAttacking = value;
+        if (value) {
+            photonView.RPC("SendIsAttacking", RpcTarget.Others, value);
+        }
+    }
+
+    public bool GetIsAttacking() {
+        return isAttacking;
+    }
+
+    [PunRPC]
+    private void SendIsAttacking(bool value) {
+        isAttacking = value;
+    }
 
     // xVelocity
 

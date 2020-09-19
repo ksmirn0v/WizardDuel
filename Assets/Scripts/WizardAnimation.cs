@@ -13,15 +13,15 @@ public class WizardAnimation : MonoBehaviour {
     }
 
     void Update() {
-        if (wizardModel.isMoving) {
-            animator.SetBool("IsMoving", !wizardModel.isJumping);
+        if (wizardModel.GetIsMoving()) {
+            animator.SetBool("IsMoving", !wizardModel.GetIsJumping());
         } else {
             animator.SetBool("IsMoving", false);
         }
-        animator.SetBool("IsJumping", wizardModel.isJumping);
+        animator.SetBool("IsJumping", wizardModel.GetIsJumping());
 
-        if (wizardModel.isAttacking) {
-            wizardModel.isAttacking = false;
+        if (wizardModel.GetIsAttacking()) {
+            wizardModel.SetIsAttacking(false);
             animator.SetTrigger("AttackTrigger");
         }
 
