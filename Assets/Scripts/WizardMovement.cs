@@ -13,15 +13,15 @@ public class WizardMovement : MonoBehaviour {
     }
 
     private void Update() {
-        if (Mathf.Abs(wizardModel.xVelocity) > Mathf.Epsilon) {
-            rigidBody.velocity = new Vector2(wizardModel.xVelocity, rigidBody.velocity.y);
-            transform.localScale = new Vector3(wizardModel.xScale, transform.localScale.y, transform.localScale.z);
-            wizardModel.xVelocity = 0;
+        if (Mathf.Abs(wizardModel.GetXVelocity()) > Mathf.Epsilon) {
+            rigidBody.velocity = new Vector2(wizardModel.GetXVelocity(), rigidBody.velocity.y);
+            transform.localScale = new Vector3(wizardModel.GetXScale(), transform.localScale.y, transform.localScale.z);
+            wizardModel.SetXVelocity(0.0f);
         }
 
-        if (wizardModel.yVelocity > Mathf.Epsilon) {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.y, wizardModel.yVelocity);
-            wizardModel.yVelocity = 0;
+        if (wizardModel.GetYVelocity() > Mathf.Epsilon) {
+            rigidBody.velocity = new Vector2(rigidBody.velocity.y, wizardModel.GetYVelocity());
+            wizardModel.SetYVelocity(0.0f);
         }
     }
 }

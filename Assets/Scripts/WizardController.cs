@@ -33,8 +33,8 @@ public class WizardController : MonoBehaviour {
         bool triggerIsBigEnough = Mathf.Abs(horizontalTrigger) > Mathf.Epsilon;
         if (triggerIsBigEnough) {
             float directionTrigger = Mathf.Sign(horizontalTrigger);
-            wizardModel.xScale = directionTrigger;
-            wizardModel.xVelocity = horizontalTrigger * wizardModel.horizontalVelocity;
+            wizardModel.SetXScale(directionTrigger);
+            wizardModel.SetXVelocity(horizontalTrigger * wizardModel.horizontalVelocity);
         }
         wizardModel.isMoving = triggerIsBigEnough;
     }
@@ -42,7 +42,7 @@ public class WizardController : MonoBehaviour {
     private void CheckJumpCondition() {
         if (Input.GetButtonDown("Jump") && !wizardModel.isJumping) {
             wizardModel.isJumping = true;
-            wizardModel.yVelocity = wizardModel.jumpVelocity;
+            wizardModel.SetYVelocity(wizardModel.jumpVelocity);
         }
 
         bool wizardIsOnTheGround = wizardGroundCollider.IsTouchingLayers(LayerMask.GetMask("Foreground"));
