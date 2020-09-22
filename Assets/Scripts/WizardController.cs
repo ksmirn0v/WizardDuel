@@ -41,7 +41,6 @@ public class WizardController : MonoBehaviour {
 
     private void CheckJumpCondition() {
         if (Input.GetButtonDown("Jump") && !wizardModel.GetIsJumping()) {
-            wizardModel.SetIsJumping(true);
             wizardModel.SetYVelocity(wizardModel.jumpVelocity);
         }
 

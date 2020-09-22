@@ -20,11 +20,23 @@ public class WizardModel : MonoBehaviourPunCallbacks {
     private float yVelocity = 0.0f;
     private float xScale = 0.0f;
 
+    // position
+    
+    [PunRPC]
+    private void SendPosition(float xPosition, float yPosition) {
+        if (transform.position.x != xPosition && transform.position.y != yPosition) {
+            transform.position = new Vector3(xPosition, yPosition);
+        }
+    }
+
     // isMoving
 
     public void SetIsMoving(bool value) {
-        isMoving = value;
-        photonView.RPC("SendIsMoving", RpcTarget.Others, value);
+        if (isMoving != value) {
+            isMoving = value;
+            photonView.RPC("SendIsMoving", RpcTarget.Others, value);
+            photonView.RPC("SendPosition", RpcTarget.Others, transform.position.x, transform.position.y);
+        }
     }
 
     public bool GetIsMoving() {
@@ -39,8 +51,11 @@ public class WizardModel : MonoBehaviourPunCallbacks {
     // isJumping
 
     public void SetIsJumping(bool value) {
-        isJumping = value;
-        photonView.RPC("SendIsJumping", RpcTarget.Others, value);
+        if (isJumping != value) {
+            isJumping = value;
+            photonView.RPC("SendIsJumping", RpcTarget.Others, value);
+            photonView.RPC("SendPosition", RpcTarget.Others, transform.position.x, transform.position.y);
+        }
     }
 
     public bool GetIsJumping() {
@@ -73,9 +88,11 @@ public class WizardModel : MonoBehaviourPunCallbacks {
     // xVelocity
 
     public void SetXVelocity(float value) {
-        xVelocity = value;
-        if (Mathf.Abs(value) > Mathf.Epsilon) {
-            photonView.RPC("SendXVelocity", RpcTarget.Others, value);
+        if (xVelocity != value) {
+            xVelocity = value;
+            if (Mathf.Abs(value) > Mathf.Epsilon) {
+                photonView.RPC("SendXVelocity", RpcTarget.Others, value);
+            }
         }
     }
 
@@ -91,9 +108,11 @@ public class WizardModel : MonoBehaviourPunCallbacks {
     // yVelocity
 
     public void SetYVelocity(float value) {
-        yVelocity = value;
-        if (Mathf.Abs(value) > Mathf.Epsilon) {
-            photonView.RPC("SendYVelocity", RpcTarget.Others, value);
+        if (yVelocity != value) {
+            yVelocity = value;
+            if (Mathf.Abs(value) > Mathf.Epsilon) {
+                photonView.RPC("SendYVelocity", RpcTarget.Others, value);
+            }
         }
     }
 
@@ -109,9 +128,11 @@ public class WizardModel : MonoBehaviourPunCallbacks {
     // xScale
 
     public void SetXScale(float value) {
-        xScale = value;
-        if (Mathf.Abs(value) > Mathf.Epsilon) {
-            photonView.RPC("SendXScale", RpcTarget.Others, value);
+        if (xScale != value) {
+            xScale = value;
+            if (Mathf.Abs(value) > Mathf.Epsilon) {
+                photonView.RPC("SendXScale", RpcTarget.Others, value);
+            }
         }
     }
 
