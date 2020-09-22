@@ -20,7 +20,7 @@ public class WizardMovement : MonoBehaviour {
         }
 
         if (wizardModel.GetYVelocity() > Mathf.Epsilon) {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.y, wizardModel.GetYVelocity());
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, wizardModel.GetYVelocity());
             wizardModel.SetYVelocity(0.0f);
         }
     }
