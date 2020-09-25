@@ -8,6 +8,7 @@ public class PlatformModel : MonoBehaviourPunCallbacks {
     // constants
     public float verticalVelocity = 7.5f;
 
+    // variables that are sent over the network
     private float yVelocity = 0.0f;
 
     // yVelocity

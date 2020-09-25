@@ -12,7 +12,7 @@ public class WizardModel : MonoBehaviourPunCallbacks {
     // variables that are sent over the network
     [HideInInspector] public bool isOwned = false;
     [HideInInspector] public bool isAlive = true;
-    [HideInInspector] public int lives = 10;
+    private int lives = 10;
     private bool isMoving = false;
     private bool isJumping = false;
     private bool isAttacking = false;
@@ -20,8 +20,35 @@ public class WizardModel : MonoBehaviourPunCallbacks {
     private float yVelocity = 0.0f;
     private float xScale = 0.0f;
 
+    // lives
+
+    public void SetLives(int value) {
+        if (lives != value) {
+            lives = value;
+            photonView.RPC("SendLives", RpcTarget.Others, value);
+            if (lives <= 0) {
+                isAlive = false;
+                photonView.RPC("SendIsAlive", RpcTarget.Others, isAlive);
+            }
+        }
+    }
+
+    public int GetLives() {
+        return lives;
+    }
+
+    [PunRPC]
+    private void SendLives(int value) {
+        lives = value;
+    }
+
+    [PunRPC]
+    private void SendIsAlive(bool value) {
+        isAlive = value;
+    }
+
     // position
-    
+
     [PunRPC]
     private void SendPosition(float xPosition, float yPosition) {
         if (transform.position.x != xPosition && transform.position.y != yPosition) {

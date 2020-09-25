@@ -25,11 +25,7 @@ public class WizardHealth : MonoBehaviour {
     }
 
     void Update() {
-        if (!wizardModel.isAlive) {
-            return;
-        }
-
         healthIndicator.transform.position = Camera.main.WorldToScreenPoint(wizardModel.transform.position) + offset;
-        healthSlider.value = wizardModel.lives;
+        healthSlider.value = wizardModel.GetLives();
     }
 }

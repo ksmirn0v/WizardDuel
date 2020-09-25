@@ -34,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 2730892477567697866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 2730892477745173023}
   m_Father: {fileID: 0}
@@ -72,10 +72,10 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: cffcb186eaf8a644b8f7790c69796db8, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -96,13 +96,6 @@ MonoBehaviour:
   jumpVelocity: 15
   isOwned: 0
   isAlive: 1
-  lives: 10
-  isMoving: 0
-  isJumping: 0
-  isAttacking: 0
-  xVelocity: 0
-  yVelocity: 0
-  xScale: 0
 --- !u!114 &1977550052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,7 +291,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2730892477745173022}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 8f878b27906000444be59d93280a7f56, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0

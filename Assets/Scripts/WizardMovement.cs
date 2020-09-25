@@ -23,5 +23,9 @@ public class WizardMovement : MonoBehaviour {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, wizardModel.GetYVelocity());
             wizardModel.SetYVelocity(0.0f);
         }
+
+        if (!wizardModel.GetIsMoving() && Mathf.Abs(rigidBody.velocity.x) > Mathf.Epsilon) {
+            rigidBody.velocity = new Vector2(0.0f, rigidBody.velocity.y);
+        }
     }
 }
