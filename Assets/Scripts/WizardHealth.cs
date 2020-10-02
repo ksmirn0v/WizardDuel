@@ -17,19 +17,18 @@ public class WizardHealth : MonoBehaviour {
     private void Awake() {
         healthIndicator = Instantiate(healthIndicatorPrefab);
         healthIndicator.transform.SetParent(GameObject.Find("Canvas").GetComponent<Transform>(), false);
-        wizardModel = GetComponent<WizardModel>();
-    }
-
-    void Start() {
         healthSlider = healthIndicator.transform.GetComponent<Slider>();
         playerName = healthIndicator.transform.GetComponentInChildren<Text>();
+        wizardModel = GetComponent<WizardModel>();
+        wizardModel.OnPlayerNameChanged += SetPlayerName;
     }
 
     void Update() {
-        if (playerName.name != wizardModel.GetPlayerName()) {
-            playerName.text = wizardModel.GetPlayerName();
-        }
         healthIndicator.transform.position = Camera.main.WorldToScreenPoint(wizardModel.transform.position) + offset;
         healthSlider.value = wizardModel.GetLives();
+    }
+
+    private void SetPlayerName(string value) {
+        playerName.text = value;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using Photon.Pun;
 using UnityEngine;
 
@@ -8,6 +9,9 @@ public class WizardModel : MonoBehaviourPunCallbacks {
     // constants
     public float horizontalVelocity = 8.0f;
     public float jumpVelocity = 15.0f;
+
+    // actions
+    public Action<string> OnPlayerNameChanged;
 
     // variables that are sent over the network
     [HideInInspector] public bool isOwned = false;
@@ -25,18 +29,15 @@ public class WizardModel : MonoBehaviourPunCallbacks {
 
     public void SetPlayerName(string value) {
         if (playerName != value) {
-            playerName = value;
-            photonView.RPC("SendPlayerName", RpcTarget.Others, value);
+            photonView.RPC("SendPlayerName", RpcTarget.All, value);
         }
-    }
-
-    public string GetPlayerName() {
-        return playerName;
     }
 
     [PunRPC]
     private void SendPlayerName(string value) {
-        playerName = value;
+        if (OnPlayerNameChanged != null) {
+            OnPlayerNameChanged(value);
+        }
     }
 
     // lives
