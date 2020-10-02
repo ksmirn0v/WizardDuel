@@ -12,6 +12,7 @@ public class WizardModel : MonoBehaviourPunCallbacks {
     // variables that are sent over the network
     [HideInInspector] public bool isOwned = false;
     [HideInInspector] public bool isAlive = true;
+    private string playerName = "Player";
     private int lives = 10;
     private bool isMoving = false;
     private bool isJumping = false;
@@ -19,6 +20,24 @@ public class WizardModel : MonoBehaviourPunCallbacks {
     private float xVelocity = 0.0f;
     private float yVelocity = 0.0f;
     private float xScale = 0.0f;
+
+    // playerName
+
+    public void SetPlayerName(string value) {
+        if (playerName != value) {
+            playerName = value;
+            photonView.RPC("SendPlayerName", RpcTarget.Others, value);
+        }
+    }
+
+    public string GetPlayerName() {
+        return playerName;
+    }
+
+    [PunRPC]
+    private void SendPlayerName(string value) {
+        playerName = value;
+    }
 
     // lives
 

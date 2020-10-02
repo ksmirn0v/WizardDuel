@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +26,9 @@ public class WizardHealth : MonoBehaviour {
     }
 
     void Update() {
+        if (playerName.name != wizardModel.GetPlayerName()) {
+            playerName.text = wizardModel.GetPlayerName();
+        }
         healthIndicator.transform.position = Camera.main.WorldToScreenPoint(wizardModel.transform.position) + offset;
         healthSlider.value = wizardModel.GetLives();
     }

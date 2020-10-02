@@ -15,15 +15,12 @@ public class GameManager : MonoBehaviourPunCallbacks {
             return;
         }
 
-        if (PlayerManager.localInstance == null) {
-            if (PhotonNetwork.IsMasterClient) {
-                player = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
-                wizardModelLeft.isOwned = true;
-            } else {
-                player = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
-                wizardModelRight.isOwned = true;
-
-            }
+        if (PhotonNetwork.IsMasterClient) {              
+            wizardModelLeft.isOwned = true;
+            wizardModelLeft.SetPlayerName(PhotonNetwork.LocalPlayer.NickName);
+        } else {
+            wizardModelRight.isOwned = true;
+            wizardModelRight.SetPlayerName(PhotonNetwork.LocalPlayer.NickName);
         }
     }
 
