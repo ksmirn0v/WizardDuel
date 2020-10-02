@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitVFX: {fileID: 5003658518373997734, guid: 3cef62a39825992408726e393b85e2e9, type: 3}
+  soundEffect: {fileID: 8300000, guid: c7e3d1986339f6c41839c8ac9b07c596, type: 3}
 --- !u!1 &1125943938048544367
 GameObject:
   m_ObjectHideFlags: 0

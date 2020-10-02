@@ -148,6 +148,7 @@ MonoBehaviour:
     type: 3}
   mainTransform: {fileID: 2730892477567697867}
   spawnTransform: {fileID: 5538962136125200992}
+  soundEffect: {fileID: 8300000, guid: 62ced63badb948143865784182fd63cc, type: 3}
 --- !u!114 &6346667726625425387
 MonoBehaviour:
   m_ObjectHideFlags: 0
