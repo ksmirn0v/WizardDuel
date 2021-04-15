@@ -14,8 +14,8 @@ public class WizardModel : MonoBehaviourPunCallbacks {
     public Action<string> OnPlayerNameChanged;
 
     // variables that are sent over the network
-    [HideInInspector] public bool isOwned = false;
-    [HideInInspector] public bool isAlive = true;
+    /*[HideInInspector]*/ public bool isOwned = false;
+    /*[HideInInspector]*/ public bool isAlive = true;
     private string playerName = "Player";
     private int lives = 10;
     private bool isMoving = false;
